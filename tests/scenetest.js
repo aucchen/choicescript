@@ -1099,6 +1099,7 @@ var tokenizerTests = {
     ,'3%2': [{name:"NUMBER",value:"3",pos:1},{name:"OPERATOR",value:"%",pos:2},{name:"NUMBER",value:"2",pos:3}]
     ,'not(false)': [{name:"FUNCTION",value:"not(",pos:4,func:"not"},{name:"VAR",value:"false",pos:9},{name:"CLOSE_PARENTHESIS",value:")",pos:10}]
     ,'round(1.5)': [{name:"FUNCTION",value:"round(",pos:6,func:"round"},{name:"NUMBER",value:"1.5",pos:9},{name:"CLOSE_PARENTHESIS",value:")",pos:10}]
+    ,'sqrt(4)': [{name:"FUNCTION",value:"sqrt(",pos:5,func:"sqrt"},{name:"NUMBER",value:"4",pos:6},{name:"CLOSE_PARENTHESIS",value:")",pos:7}]
 }
 
 var tokenizerErrorTests = ['"foo'];
@@ -1366,6 +1367,63 @@ test("round", function() {
     var token = stack.shift();
     var actual = scene.evaluateValueToken(token, stack);
     doh.is(2, actual);
+});
+
+//potential floating point issues?
+test("sqrt", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("sqrt(4)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(2, actual);
+});
+
+test("sin", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("sin(90)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(1, actual);
+});
+
+test("cos", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("cos(0)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(1, actual);
+});
+
+test("tan", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("tan(0)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(0, actual);
+});
+
+test("asin", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("asin(0)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(0, actual);
+});
+
+test("acos", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("acos(1)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(0, actual);
+});
+
+test("atan", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("atan(0)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(0, actual);
 });
 
 module("Line Breaks");
