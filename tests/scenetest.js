@@ -1426,6 +1426,22 @@ test("atan", function() {
     doh.is(0, actual);
 });
 
+test("ceil", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("ceil(0.4)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(1, actual);
+});
+
+test("floor", function() {
+    var scene = new Scene();
+    var stack = scene.tokenizeExpr("floor(0.8)");
+    var token = stack.shift();
+    var actual = scene.evaluateValueToken(token, stack);
+    doh.is(0, actual);
+});
+
 module("Line Breaks");
 
 

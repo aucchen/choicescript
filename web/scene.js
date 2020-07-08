@@ -3798,6 +3798,14 @@ Scene.prototype.functions = {
     if (isNaN(value*1)) throw new Error(this.lineMsg()+"round() value is not a number: " + value);
     return Math.round(value);
   },
+  ceil: function(value) {
+    if (isNaN(value*1)) throw new Error(this.lineMsg()+"ceil() value is not a number: " + value);
+    return Math.ceil(value);
+  },
+  floor: function(value) {
+    if (isNaN(value*1)) throw new Error(this.lineMsg()+"round() value is not a number: " + value);
+    return Math.floor(value);
+  },
   sqrt: function(value) {
     if (isNaN(value*1)) throw new Error(this.lineMsg()+"sqrt() value is not a number: " + value);
     return Math.sqrt(value);
@@ -4378,7 +4386,7 @@ Scene.tokens = [
     {name:"CLOSE_CURLY", test:function(str){ return Scene.regexpMatch(str,/^\}/); } },
     {name:"OPEN_SQUARE", test:function(str){ return Scene.regexpMatch(str,/^\[/); } },
     {name:"CLOSE_SQUARE", test:function(str){ return Scene.regexpMatch(str,/^\]/); } },
-    {name:"FUNCTION", test:function(str){ return Scene.regexpMatch(str,/^(not|round|timestamp|log|length|auto|sqrt|sin|cos|tan|asin|acos|atan)\s*\(/); } },
+    {name:"FUNCTION", test:function(str){ return Scene.regexpMatch(str,/^(not|round|ceil|floor|timestamp|log|length|auto|sqrt|sin|cos|tan|asin|acos|atan)\s*\(/); } },
     {name:"NUMBER", test:function(str){ return Scene.regexpMatch(str,/^\d+(\.\d+)?\b/); } },
     {name:"STRING", test:function(str, line) {
             var i;
